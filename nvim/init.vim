@@ -24,11 +24,11 @@ call plug#begin()
   Plug 'w0ng/vim-hybrid'                 " Muted, dark colorscheme
 
 "  Language-specific plugins
-  Plug 'aliva/vim-fish'
-  Plug 'LaTeX-Box-Team/LaTeX-Box'
-  Plug 'the-lambda-church/coquille'
-  Plug 'rust-lang/rust.vim'
-  Plug 'cespare/vim-toml'
+  Plug 'aliva/vim-fish',                 { 'for': 'fish' }
+  Plug 'LaTeX-Box-Team/LaTeX-Box',       { 'for': 'tex' }
+  Plug 'the-lambda-church/coquille',     { 'for': 'coq' }
+  Plug 'rust-lang/rust.vim',             { 'for': 'rust' }
+  Plug 'cespare/vim-toml',               { 'for': 'toml' }
 call plug#end()
 " }}}
 
