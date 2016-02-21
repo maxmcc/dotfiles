@@ -20,12 +20,19 @@ call plug#begin()
   Plug 'mhinz/vim-startify'              " Nicer startup UI and MRU list
   Plug 'scrooloose/nerdtree'             " Nicer filesystem navigation
   Plug 'tpope/vim-git'                   " Some misc git niceties
-  Plug 'tpope/vim-fugitive'              " Some misc git niceties
+  Plug 'tpope/vim-fugitive'              " Git front-end for vim
   Plug 'w0ng/vim-hybrid'                 " Muted, dark colorscheme
 
 "  Language-specific plugins
   Plug 'aliva/vim-fish',                 { 'for': 'fish' }
+
   Plug 'LaTeX-Box-Team/LaTeX-Box',       { 'for': 'tex' }
+    let g:tex_flavor='latex'
+    let g:LatexBox_latexmk_async = 1
+    let g:LatexBox_latexmk_preview_continuously = 1
+    let g:LatexBox_quickfix = 2
+    let g:LatexBox_build_dir = 'build'
+
   Plug 'the-lambda-church/coquille',     { 'for': 'coq' }
   Plug 'rust-lang/rust.vim',             { 'for': 'rust' }
   Plug 'cespare/vim-toml',               { 'for': 'toml' }
