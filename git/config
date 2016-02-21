@@ -1,5 +1,5 @@
 [core]
-  excludesfile = /Users/Max/.dotfiles/ignore
+  excludesfile = /Users/Max/.dotfiles/git/ignore
   editor = nvim
 
 [diff]
