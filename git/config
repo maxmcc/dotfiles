@@ -1,0 +1,13 @@
+[core]
+  excludesfile = /Users/Max/.dotfiles/ignore
+  editor = nvim
+
+[diff]
+  algorithm = patience
+
+[push]
+ default = simple
+
+[user]
+  name = max mccarthy
+  email = maxmcc@seas.upenn.edu
