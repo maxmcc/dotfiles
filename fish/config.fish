@@ -31,8 +31,9 @@ alias gg 'git status'
 # Exports {{{
 set -gx PATH $HOME/.cabal/bin $PATH
 set -gx PATH $HOME/.multirust/toolchains/stable/cargo/bin $PATH
-set -gx PATH $HOME/.rbenv/bin $PATH
 set -gx PATH $HOME/.rbenv/shims $PATH
+set -gx PATH $HOME/.rbenv/bin $PATH
+rbenv rehash >/dev/null ^&1
 set -gx PATH ./bin $PATH
 eval (opam config env)
 # }}}
