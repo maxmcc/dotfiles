@@ -15,6 +15,7 @@ nnoremap Q <nop>
 call plug#begin()
   Plug 'airblade/vim-gitgutter'          " Diff markings in gutter
   Plug 'christoomey/vim-tmux-navigator'  " Unify vim and tmux splits (!!)
+  Plug 'def-lkb/vimbufsync'              " Detect buffer changes
   Plug 'ervandew/supertab'               " Tab-based autocomplete
   Plug 'itchyny/lightline.vim'           " Lightweight status line
   Plug 'mhinz/vim-startify'              " Nicer startup UI and MRU list
