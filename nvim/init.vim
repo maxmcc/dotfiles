@@ -12,7 +12,6 @@ nnoremap Q <nop>
 
 "   Tell it where to find Python
 let g:python_host_prog = '/usr/local/bin/python'
-
 " }}}
 
 " Plugins (vim-plug) {{{
@@ -28,11 +27,10 @@ call plug#begin()
   Plug 'tpope/vim-fugitive'              " Git front-end for vim
   Plug 'w0ng/vim-hybrid'                 " Muted, dark colorscheme
 
-"  Language-specific plugins
+  "  Language-specific plugins
   Plug 'aliva/vim-fish',                 { 'for': 'fish' }
   Plug 'LaTeX-Box-Team/LaTeX-Box',       { 'for': 'tex' }
-  Plug 'the-lambda-church/coquille',     { 'for': 'coq',
-                                           \ 'branch': 'pathogen-bundle' }
+  Plug 'the-lambda-church/coquille',     { 'for': 'coq', 'branch': 'pathogen-bundle' }
   Plug 'rust-lang/rust.vim',             { 'for': 'rust' }
   Plug 'cespare/vim-toml',               { 'for': 'toml' }
 call plug#end()
