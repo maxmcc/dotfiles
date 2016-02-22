@@ -9,6 +9,10 @@ nnoremap <BS> <C-W>h
 
 "   Kill ex-mode with fire
 nnoremap Q <nop>
+
+"   Tell it where to find Python
+let g:python_host_prog = '/usr/local/bin/python'
+
 " }}}
 
 " Plugins (vim-plug) {{{
@@ -27,7 +31,8 @@ call plug#begin()
 "  Language-specific plugins
   Plug 'aliva/vim-fish',                 { 'for': 'fish' }
   Plug 'LaTeX-Box-Team/LaTeX-Box',       { 'for': 'tex' }
-  Plug 'the-lambda-church/coquille',     { 'for': 'coq' }
+  Plug 'the-lambda-church/coquille',     { 'for': 'coq',
+                                           \ 'branch': 'pathogen-bundle' }
   Plug 'rust-lang/rust.vim',             { 'for': 'rust' }
   Plug 'cespare/vim-toml',               { 'for': 'toml' }
 call plug#end()
@@ -194,17 +199,19 @@ augroup END
 " }}}
 
 " Coq {{{
+function! CoquilleKeybindings()
+  map <buffer> <silent> <F7> :CoqUndo<CR>
+  map <buffer> <silent> <F8> :CoqNext<CR>
+  map <buffer> <silent> <F9> :CoqToCursor<CR>
+
+  imap <buffer> <silent> <F7> <C-\><C-o>:CoqUndo<CR>
+  imap <buffer> <silent> <F8> <C-\><C-o>:CoqNext<CR>
+  imap <buffer> <silent> <F9> <C-\><C-o>:CoqToCursor<CR>
+endfunction
+
 augroup coq
   autocmd!
-  function! CoquilleKeybindings()
-    map <buffer> <silent> <F7> :CoqUndo<CR>
-    map <buffer> <silent> <F8> :CoqNext<CR>
-    map <buffer> <silent> <F9> :CoqToCursor<CR>
-
-    imap <buffer> <silent> <F7> <C-\><C-o>:CoqUndo<CR>
-    imap <buffer> <silent> <F8> <C-\><C-o>:CoqNext<CR>
-    imap <buffer> <silent> <F9> <C-\><C-o>:CoqToCursor<CR>
-  endfunction
+  au BufRead,BufNewFile *.v set filetype=coq
   let g:coquille_auto_move = 'true'
   au FileType coq call CoquilleKeybindings()
   hi CheckedByCoq ctermbg=17 guibg=LightGreen
