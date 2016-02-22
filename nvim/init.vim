@@ -18,21 +18,25 @@ let g:python_host_prog = '/usr/local/bin/python'
 call plug#begin()
   Plug 'airblade/vim-gitgutter'          " Diff markings in gutter
   Plug 'christoomey/vim-tmux-navigator'  " Unify vim and tmux splits (!!)
-  Plug 'def-lkb/vimbufsync'              " Detect buffer changes
   Plug 'ervandew/supertab'               " Tab-based autocomplete
   Plug 'itchyny/lightline.vim'           " Lightweight status line
   Plug 'mhinz/vim-startify'              " Nicer startup UI and MRU list
   Plug 'scrooloose/nerdtree'             " Nicer filesystem navigation
   Plug 'tpope/vim-git'                   " Some misc git niceties
-  Plug 'tpope/vim-fugitive'              " Git front-end for vim
   Plug 'w0ng/vim-hybrid'                 " Muted, dark colorscheme
 
   "  Language-specific plugins
-  Plug 'aliva/vim-fish',                 { 'for': 'fish' }
-  Plug 'LaTeX-Box-Team/LaTeX-Box',       { 'for': 'tex' }
-  Plug 'the-lambda-church/coquille',     { 'for': 'coq', 'branch': 'pathogen-bundle' }
-  Plug 'rust-lang/rust.vim',             { 'for': 'rust' }
-  Plug 'cespare/vim-toml',               { 'for': 'toml' }
+  Plug 'aliva/vim-fish', { 'for': 'fish' }
+  Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for': 'tex' }
+  Plug 'def-lkb/vimbufsync', { 'for': 'coq' } |
+    \ Plug 'the-lambda-church/coquille',
+    \   { 'for': 'coq', 'branch': 'pathogen-bundle' }
+  Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+  Plug 'cespare/vim-toml', { 'for': 'toml' }
+
+  "  Plugins managed by OPAM
+  Plug '~/.opam/system/share/ocp-indent', { 'rtp': 'vim' }
+  Plug '~/.opam/system/share/merlin', { 'rtp': 'vim' }
 call plug#end()
 " }}}
 
@@ -175,45 +179,47 @@ nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 " }}}
 
-" LaTeX {{{
-augroup tex
-  autocmd!
-  let g:tex_flavor='latex'
-  let g:LatexBox_latexmk_async = 1
-  let g:LatexBox_latexmk_preview_continuously = 1
-  let g:LatexBox_quickfix = 2
-  let g:LatexBox_build_dir = 'build'
-augroup END
-" }}}
+" Language-specific {{{
 
-" Rust {{{
-augroup rust
-  autocmd!
-  au FileType rust compiler cargo
-  autocmd FileType rust nmap <Leader>r :make run<CR>
-  autocmd FileType rust nmap <Leader>b :make build<CR>
-  autocmd FileType rust nmap <Leader>t :make test<CR>
-augroup END
-" }}}
+  " LaTeX {{{
+  augroup tex
+    autocmd!
+    let g:tex_flavor='latex'
+    let g:LatexBox_latexmk_async = 1
+    let g:LatexBox_latexmk_preview_continuously = 1
+    let g:LatexBox_quickfix = 2
+    let g:LatexBox_build_dir = 'build'
+  augroup END
+  " }}}
 
-" Coq {{{
-function! CoquilleKeybindings()
-  map <buffer> <silent> <F7> :CoqUndo<CR>
-  map <buffer> <silent> <F8> :CoqNext<CR>
-  map <buffer> <silent> <F9> :CoqToCursor<CR>
+  " Rust {{{
+  augroup rust
+    autocmd!
+    autocmd FileType rust compiler cargo
+    autocmd FileType rust nmap <Leader>r :make run<CR>
+    autocmd FileType rust nmap <Leader>b :make build<CR>
+    autocmd FileType rust nmap <Leader>t :make test<CR>
+  augroup END
+  " }}}
 
-  imap <buffer> <silent> <F7> <C-\><C-o>:CoqUndo<CR>
-  imap <buffer> <silent> <F8> <C-\><C-o>:CoqNext<CR>
-  imap <buffer> <silent> <F9> <C-\><C-o>:CoqToCursor<CR>
-endfunction
+  " Coq {{{
+  function! CoquilleKeybindings()
+    map <buffer> <silent> <F7> :CoqUndo<CR>
+    map <buffer> <silent> <F8> :CoqNext<CR>
+    map <buffer> <silent> <F9> :CoqToCursor<CR>
 
-augroup coq
-  autocmd!
-  au BufRead,BufNewFile *.v set filetype=coq
-  let g:coquille_auto_move = 'true'
-  au FileType coq call CoquilleKeybindings()
-  hi CheckedByCoq ctermbg=17 guibg=LightGreen
-  hi SentToCoq ctermbg=60 guibg=LimeGreen
-augroup END
-" }}}
+    imap <buffer> <silent> <F7> <C-\><C-o>:CoqUndo<CR>
+    imap <buffer> <silent> <F8> <C-\><C-o>:CoqNext<CR>
+    imap <buffer> <silent> <F9> <C-\><C-o>:CoqToCursor<CR>
+  endfunction
 
+  augroup coq
+    autocmd!
+    autocmd BufRead,BufNewFile *.v set filetype=coq
+    let g:coquille_auto_move = 'true'
+    autocmd FileType coq call CoquilleKeybindings()
+    highlight CheckedByCoq ctermbg=17 guibg=LightGreen
+    highlight SentToCoq ctermbg=60 guibg=LimeGreen
+  augroup END
+  " }}}
+"}}}
