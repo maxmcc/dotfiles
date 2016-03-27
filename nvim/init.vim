@@ -16,27 +16,36 @@ let g:python_host_prog = '/usr/local/bin/python'
 
 " Plugins (vim-plug) {{{
 call plug#begin()
-  Plug 'airblade/vim-gitgutter'          " Diff markings in gutter
-  Plug 'christoomey/vim-tmux-navigator'  " Unify vim and tmux splits (!!)
-  Plug 'ervandew/supertab'               " Tab-based autocomplete
-  Plug 'itchyny/lightline.vim'           " Lightweight status line
-  Plug 'mhinz/vim-startify'              " Nicer startup UI and MRU list
-  Plug 'scrooloose/nerdtree'             " Nicer filesystem navigation
-  Plug 'tpope/vim-git'                   " Some misc git niceties
-  Plug 'w0ng/vim-hybrid'                 " Muted, dark colorscheme
+  Plug 'airblade/vim-gitgutter'
+  Plug 'benekastah/neomake'
+  Plug 'christoomey/vim-tmux-navigator'
+  Plug 'ervandew/supertab'
+  Plug 'itchyny/lightline.vim'
+  Plug 'mhinz/vim-startify'
+  Plug 'scrooloose/nerdtree'
+  Plug 'shougo/deoplete.nvim'
+  Plug 'tpope/vim-fugitive'
+  Plug 'tpope/vim-git'
+  Plug 'tpope/vim-surround'
+  Plug 'w0ng/vim-hybrid'
+  Plug 'wellle/tmux-complete.vim'
+  Plug 'vim-jp/vim-java'
 
   "  Language-specific plugins
   Plug 'aliva/vim-fish', { 'for': 'fish' }
-  Plug 'LaTeX-Box-Team/LaTeX-Box', { 'for': 'tex' }
+  Plug 'lervag/vimtex', { 'for': 'tex' }
   Plug 'def-lkb/vimbufsync', { 'for': 'coq' } |
     \ Plug 'the-lambda-church/coquille',
     \   { 'for': 'coq', 'branch': 'pathogen-bundle' }
   Plug 'rust-lang/rust.vim', { 'for': 'rust' }
   Plug 'cespare/vim-toml', { 'for': 'toml' }
+  Plug 'bitc/vim-hdevtools', { 'for': 'haskell' }
+  Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
+  Plug 'scrooloose/syntastic', { 'for': 'ocaml' }
 
   "  Plugins managed by OPAM
-  Plug '~/.opam/system/share/ocp-indent', { 'rtp': 'vim' }
-  Plug '~/.opam/system/share/merlin', { 'rtp': 'vim' }
+  Plug '~/.opam/system/share/ocp-indent', { 'rtp': 'vim', 'for': 'ocaml' }
+  Plug '~/.opam/system/share/merlin', { 'rtp': 'vim', 'for': 'ocaml' }
 call plug#end()
 " }}}
 
@@ -44,25 +53,24 @@ call plug#end()
 set laststatus=2                         " Last window always has status line
 set noshowmode                           " Don't show '-- INSERT --' etc.
 
-"   Lightline status line config
 let g:lightline = {
-  \   'colorscheme': 'Tomorrow_Night',
-  \   'active': {
-  \     'left':  [ [ 'mode', 'paste' ],
-  \                [ 'fugitive', 'filename' ]
-  \              ],
-  \     'right': [ [ 'syntastic', 'lineinfo' ],
-  \                ['percent'],
-  \                [ 'fileformat', 'fileencoding', 'filetype' ]
-  \              ]
-  \   },
-  \   'component_expand': {
-  \     'syntastic': 'SyntasticStatuslineFlag',
-  \   },
-  \   'component_type': {
-  \     'syntastic': 'error',
-  \   },
-  \ }
+      \   'colorscheme': 'Tomorrow_Night',
+      \   'active': {
+      \     'left':  [ [ 'mode', 'paste' ],
+      \                [ 'fugitive', 'filename' ]
+      \              ],
+      \     'right': [ [ 'neomake', 'lineinfo' ],
+      \                ['percent'],
+      \                [ 'fileformat', 'fileencoding', 'filetype' ]
+      \              ]
+      \   },
+      \   'component_function': {
+      \     'neomake': 'neomake#statusline#LoclistStatus'
+      \   },
+      \   'component_type': {
+      \     'neomake': 'error',
+      \   },
+      \ }
 
 "   Lightline tab bar config
 let g:lightline.tabline = {
@@ -77,7 +85,19 @@ set nowritebackup                        " Don't create backup files
 set noswapfile                           " Prevent swap files
 " }}}
 
+" Tab completion {{{
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
+
+"   Don't be stupid about directions
+let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabContextDefaultCompletionType = "<c-n>"
+" }}}
+
 " Ergonomics {{{
+"   No noises
+set visualbell
+
 "   What is ; really good for, anyway?
 nnoremap ; :
 vnoremap ; :
@@ -103,8 +123,8 @@ set linebreak                            " Insert linebreaks for long lines
 set textwidth=80                         " Wrap at 80 characters
 
 augroup column_limit
-  autocmd BufEnter * highlight OverLength ctermbg=darkgrey guibg=#404040
-  autocmd BufEnter * match OverLength '\%>80v.\+'
+  autocmd BufEnter ocaml highlight OverLength ctermbg=darkgrey guibg=#404040
+  autocmd BufEnter ocaml match OverLength '\%>80v.\+'
 augroup END
 
 "   Trailing whitespace
@@ -155,6 +175,18 @@ endif
 "   Line numbers
 set number                              " Show line numbers
 " set cursorline                        " Highlight current line
+
+"   Movement by visual lines
+nnoremap j gj
+nnoremap k gk
+vnoremap j gj
+vnoremap k gk
+nnoremap <Down> gj
+nnoremap <Up> gk
+vnoremap <Down> gj
+vnoremap <Up> gk
+inoremap <Down> <C-o>gj
+inoremap <Up> <C-o>gk
 " }}}
 
 " Windows, splits, and tabs {{{
@@ -179,16 +211,69 @@ nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 " }}}
 
+" Neomake {{{
+let g:neomake_warning_sign = {
+      \ 'text': '>>',
+      \ 'texthl': 'Warning',
+      \ }
+
+let g:neomake_error_sign = {
+      \ 'text': '>>',
+      \ 'texthl': 'Error',
+      \ }
+
+autocmd! BufWritePost * Neomake
+" }}}
+
 " Language-specific {{{
 
+  " Haskell {{{
+  " }}}
+
   " LaTeX {{{
+  function! UpdateSkim(status)
+    if !a:status | return | endif
+
+    let l:out = b:vimtex.out()
+    let l:cmd = [g:vimtex_view_general_viewer, '-r']
+    if !empty(system('pgrep Skim'))
+      call extend(l:cmd, ['-g'])
+    endif
+    if has('nvim')
+      call jobstart(l:cmd + [line('.'), l:out])
+    elseif has('job')
+      call job_start(l:cmd + [line('.'), l:out])
+    else
+      call system(join(l:cmd + [line('.'), shellescape(l:out)], ' '))
+    endif
+  endfunction
+
   augroup tex
     autocmd!
+    let g:vimtex_latexmk_build_dir='./build'
     let g:tex_flavor='latex'
-    let g:LatexBox_latexmk_async = 1
-    let g:LatexBox_latexmk_preview_continuously = 1
-    let g:LatexBox_quickfix = 2
-    let g:LatexBox_build_dir = 'build'
+    let g:vimtex_latexmk_options='-xelatex -shell-escape -pdf'
+    let g:vimtex_quickfix_ignored_warnings = [
+          \ 'Underfull',
+          \ 'Overfull',
+          \ 'specifier changed to',
+          \ ]
+
+    let g:vimtex_syntax_minted = [
+          \ {
+          \   'lang' : 'ocaml',
+          \ },
+          \ {
+          \   'lang' : 'c',
+          \ },
+          \]
+
+    let g:vimtex_view_general_viewer
+          \ = 'displayline'
+    let g:vimtex_view_general_options = '-r @line @pdf'
+
+    " This adds a callback hook that updates Skim after compilation
+    let g:vimtex_latexmk_callback_hook = 'UpdateSkim'
   augroup END
   " }}}
 
