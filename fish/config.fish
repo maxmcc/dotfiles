@@ -26,6 +26,10 @@ alias edit 'nvim'
 alias c 'clear'
 alias f 'open -a Finder .'
 alias gg 'git status'
+
+function cis
+  ssh cis120 "cis $argv"
+end
 # }}}
 
 # Exports {{{
