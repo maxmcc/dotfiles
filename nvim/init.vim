@@ -19,13 +19,16 @@ call plug#begin()
   Plug 'airblade/vim-gitgutter'
   Plug 'benekastah/neomake'
   Plug 'christoomey/vim-tmux-navigator'
+  Plug 'cocopon/lightline-hybrid.vim'
   Plug 'ervandew/supertab'
   Plug 'itchyny/lightline.vim'
   Plug 'mhinz/vim-startify'
   Plug 'scrooloose/nerdtree'
   Plug 'shougo/deoplete.nvim'
   Plug 'tpope/vim-fugitive'
+
   Plug 'tpope/vim-git'
+  Plug 'tpope/vim-liquid'
   Plug 'tpope/vim-surround'
   Plug 'w0ng/vim-hybrid'
   Plug 'wellle/tmux-complete.vim'
@@ -42,6 +45,7 @@ call plug#begin()
   Plug 'bitc/vim-hdevtools', { 'for': 'haskell' }
   Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
   Plug 'scrooloose/syntastic', { 'for': 'ocaml' }
+  Plug 'othree/html5.vim', { 'for': 'html' }
 
   "  Plugins managed by OPAM
   Plug '~/.opam/system/share/ocp-indent', { 'rtp': 'vim', 'for': 'ocaml' }
@@ -53,31 +57,6 @@ call plug#end()
 set laststatus=2                         " Last window always has status line
 set noshowmode                           " Don't show '-- INSERT --' etc.
 
-let g:lightline = {
-      \   'colorscheme': 'Tomorrow_Night',
-      \   'active': {
-      \     'left':  [ [ 'mode', 'paste' ],
-      \                [ 'fugitive', 'filename' ]
-      \              ],
-      \     'right': [ [ 'neomake', 'lineinfo' ],
-      \                ['percent'],
-      \                [ 'fileformat', 'fileencoding', 'filetype' ]
-      \              ]
-      \   },
-      \   'component_function': {
-      \     'neomake': 'neomake#statusline#LoclistStatus'
-      \   },
-      \   'component_type': {
-      \     'neomake': 'error',
-      \   },
-      \ }
-
-"   Lightline tab bar config
-let g:lightline.tabline = {
-  \   'left': [ [ 'tabs' ] ],
-  \   'right': [ [  ] ]
-  \ }
-" }}}
 
 " Backups {{{
 set nobackup                             " Don't generate backups
@@ -159,6 +138,7 @@ set list                                " Enable highlight list
 set background=dark
 let base16colorspace=256
 colorscheme hybrid
+set fillchars+=vert:│
 
 "   GUI vim
 if has('gui_running')
@@ -222,7 +202,12 @@ let g:neomake_error_sign = {
       \ 'texthl': 'Error',
       \ }
 
-autocmd! BufWritePost * Neomake
+augroup neomake
+  autocmd!
+  let g:neomake_echo_current_error=1
+  let g:neomake_verbose=0
+  autocmd BufWritePost *.rs NeomakeProject cargo
+augroup END
 " }}}
 
 " Language-specific {{{
@@ -274,6 +259,13 @@ autocmd! BufWritePost * Neomake
 
     " This adds a callback hook that updates Skim after compilation
     let g:vimtex_latexmk_callback_hook = 'UpdateSkim'
+  augroup END
+  " }}}
+
+  " OCaml {{{
+  augroup ocaml
+    autocmd!
+    let g:syntastic_ocaml_checkers = ['merlin']
   augroup END
   " }}}
 
