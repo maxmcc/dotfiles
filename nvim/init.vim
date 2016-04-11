@@ -258,7 +258,7 @@ augroup END
     let g:vimtex_view_general_options = '-r @line @pdf'
 
     " This adds a callback hook that updates Skim after compilation
-    let g:vimtex_latexmk_callback_hook = 'UpdateSkim'
+    let g:vimtex_latexmk_callback_hooks = ['UpdateSkim']
   augroup END
   " }}}
 
