@@ -8,7 +8,7 @@ let g:lightline.component_function = {}
 let g:lightline.component_visible_condition = {}
 
 " Appearance {{{
-let g:lightline.colorscheme = 'wombat'
+let g:lightline.colorscheme = 'hybrid'
 let g:lightline.subseparator = { 'left' : '', 'right': '│' }
 " }}}
 
