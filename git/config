@@ -6,8 +6,8 @@
   algorithm = patience
 
 [push]
- default = simple
+  default = simple
 
 [user]
-  name = max mccarthy
   email = maxmcc@seas.upenn.edu
+  name = Max McCarthy
