@@ -245,12 +245,9 @@ augroup END
           \ ]
 
     let g:vimtex_syntax_minted = [
-          \ {
-          \   'lang' : 'ocaml',
-          \ },
-          \ {
-          \   'lang' : 'c',
-          \ },
+          \ {'lang': 'ocaml'},
+          \ {'lang': 'haskell'},
+          \ {'lang' : 'c'},
           \]
 
     let g:vimtex_view_general_viewer
