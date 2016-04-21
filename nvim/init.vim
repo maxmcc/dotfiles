@@ -56,7 +56,7 @@ call plug#end()
 " Status line (lightline) {{{
 set laststatus=2                         " Last window always has status line
 set noshowmode                           " Don't show '-- INSERT --' etc.
-
+" }}}
 
 " Backups {{{
 set nobackup                             " Don't generate backups
@@ -202,12 +202,8 @@ let g:neomake_error_sign = {
       \ 'texthl': 'Error',
       \ }
 
-augroup neomake
-  autocmd!
-  let g:neomake_echo_current_error=1
-  let g:neomake_verbose=0
-  autocmd BufWritePost *.rs NeomakeProject cargo
-augroup END
+let g:neomake_echo_current_error=1
+let g:neomake_verbose=0
 " }}}
 
 " Language-specific {{{
@@ -269,10 +265,7 @@ augroup END
   " Rust {{{
   augroup rust
     autocmd!
-    autocmd FileType rust compiler cargo
-    autocmd FileType rust nmap <Leader>r :make run<CR>
-    autocmd FileType rust nmap <Leader>b :make build<CR>
-    autocmd FileType rust nmap <Leader>t :make test<CR>
+    autocmd BufWritePost *.rs NeomakeProject cargo
   augroup END
   " }}}
 
