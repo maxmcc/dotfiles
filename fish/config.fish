@@ -8,6 +8,7 @@ fundle plugin 'tuvistavie/oh-my-fish-core'
 fundle plugin 'tuvistavie/fish-completion-helpers'
 fundle plugin 'oh-my-fish/theme-default'
 fundle plugin 'oh-my-fish/plugin-osx'
+fundle plugin 'tuvistavie/fish-fastdir'
 
 fundle init
 # }}}
