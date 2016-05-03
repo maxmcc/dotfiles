@@ -186,6 +186,21 @@ set foldnestmax=10                      " Don't nest deeper than 10
 nnoremap <space> za
 " }}}
 
+" Text manipulation {{{
+fun! TwiddleCase(str)
+  if a:str ==# toupper(a:str)
+    let result = tolower(a:str)
+  elseif a:str ==# tolower(a:str)
+    let result = substitute(a:str,'\(\<\w\+\>\)', '\u\1', 'g')
+  else
+    let result = toupper(a:str)
+  endif
+  return result
+endfunction
+
+vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
+" }}}
+
 " Leader shortcuts {{{
 nnoremap <leader>ev :e $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
@@ -202,8 +217,11 @@ let g:neomake_error_sign = {
       \ 'texthl': 'Error',
       \ }
 
-let g:neomake_echo_current_error=1
-let g:neomake_verbose=0
+let g:neomake_echo_current_error = 1
+let g:neomake_verbose = 0
+
+cnoreabbrev oldmake make
+cnoreabbrev make Neomake! make
 " }}}
 
 " Language-specific {{{
