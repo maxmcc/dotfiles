@@ -1,3 +1,3 @@
-function edit
+function edit --wraps=nvim
 	nvim $argv
 end
