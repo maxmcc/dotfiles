@@ -1,5 +1,5 @@
 # Autojump {{{
-[ -f /usr/local/share/autojump/autojump.fish ];
+test -f /usr/local/share/autojump/autojump.fish;
   and . /usr/local/share/autojump/autojump.fish
 # }}}
 
@@ -11,26 +11,6 @@ fundle plugin 'oh-my-fish/plugin-osx'
 fundle plugin 'tuvistavie/fish-fastdir'
 
 fundle init
-# }}}
-
-# Aliases {{{
-alias .. 'cd ..'
-alias ... 'cd ../..'
-alias cp 'cp -v'
-alias mv 'mv -v'
-alias ll 'ls -FGlAhp'
-alias tns 'tmux new -s'
-alias tas 'tmux attach -t'
-alias tls 'tmux list-sessions'
-alias vim 'nvim'
-alias edit 'nvim'
-alias c 'clear'
-alias f 'open -a Finder .'
-alias gg 'git status'
-
-function cis
-  ssh cis120 "cis $argv"
-end
 # }}}
 
 # Exports {{{
