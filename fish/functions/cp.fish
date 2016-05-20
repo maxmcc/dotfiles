@@ -1,3 +1,3 @@
 function cp --wraps=cp
-	cp -v $argv
+	command cp -v $argv
 end
