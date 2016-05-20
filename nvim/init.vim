@@ -226,6 +226,13 @@ cnoreabbrev make Neomake! make
 
 " Language-specific {{{
 
+  " C {{{
+  augroup c
+    autocmd!
+    autocmd BufWritePost *.c,*.h Neomake
+  augroup END
+  " }}}
+
   " Haskell {{{
   " }}}
 
