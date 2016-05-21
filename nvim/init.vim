@@ -287,6 +287,14 @@ cnoreabbrev make Neomake! make
   augroup END
   " }}}
 
+  " Python {{{
+  augroup python_ " ugh keywords
+    autocmd!
+    autocmd BufWritePost *.py Neomake
+    let g:neomake_python_enabled_makers = ['flake8']
+  augroup END
+  " }}}
+
   " Rust {{{
   augroup rust
     autocmd!
