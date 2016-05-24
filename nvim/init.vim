@@ -22,30 +22,30 @@ call plug#begin()
   Plug 'cocopon/lightline-hybrid.vim'
   Plug 'ervandew/supertab'
   Plug 'itchyny/lightline.vim'
+  Plug 'konfekt/FastFold' | Plug 'lukaszkorecki/workflowish'
   Plug 'mhinz/vim-startify'
   Plug 'scrooloose/nerdtree'
   Plug 'shougo/deoplete.nvim'
   Plug 'tpope/vim-fugitive'
-
   Plug 'tpope/vim-git'
   Plug 'tpope/vim-liquid'
   Plug 'tpope/vim-surround'
   Plug 'w0ng/vim-hybrid'
   Plug 'wellle/tmux-complete.vim'
-  Plug 'vim-jp/vim-java'
 
   "  Language-specific plugins
   Plug 'aliva/vim-fish', { 'for': 'fish' }
-  Plug 'lervag/vimtex', { 'for': 'tex' }
-  Plug 'def-lkb/vimbufsync', { 'for': 'coq' } |
-    \ Plug 'the-lambda-church/coquille',
-    \   { 'for': 'coq', 'branch': 'pathogen-bundle' }
-  Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-  Plug 'cespare/vim-toml', { 'for': 'toml' }
   Plug 'bitc/vim-hdevtools', { 'for': 'haskell' }
+  Plug 'cespare/vim-toml', { 'for': 'toml' }
+  Plug 'def-lkb/vimbufsync', { 'for': 'coq' }
+        \ | Plug 'the-lambda-church/coquille',
+        \ { 'for': 'coq', 'branch': 'pathogen-bundle' }
+  Plug 'lervag/vimtex', { 'for': 'tex' }
   Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
-  Plug 'scrooloose/syntastic', { 'for': 'ocaml' }
   Plug 'othree/html5.vim', { 'for': 'html' }
+  Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+  Plug 'scrooloose/syntastic', { 'for': 'ocaml' }
+  Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 
   "  Plugins managed by OPAM
   Plug '~/.opam/system/share/ocp-indent', { 'rtp': 'vim', 'for': 'ocaml' }
@@ -290,8 +290,16 @@ cnoreabbrev make Neomake! make
   " Python {{{
   augroup python_ " ugh keywords
     autocmd!
+    let python_highlight_all = 1
     autocmd BufWritePost *.py Neomake
     let g:neomake_python_enabled_makers = ['flake8']
+  augroup END
+  " }}}
+
+  " Ruby {{{
+  augroup ruby_
+    autocmd!
+    autocmd BufWritePost *.rb,*.ru,*.erb Neomake
   augroup END
   " }}}
 
