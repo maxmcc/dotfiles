@@ -95,3 +95,17 @@ function! LightLineFugitive()
   endif
 endfunction
 " }}}
+
+" CtrlP {{{
+let g:ctrlp_status_func = {}
+let g:ctrlp_status_func.main = 'CtrlPStatusFunc_1'
+let g:ctrlp_status_func.prog = 'CtrlPStatusFunc_2'
+
+function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
+  return lightline#statusline(0)
+endfunction
+
+function! CtrlPStatusFunc_2(str)
+  return lightline#statusline(0)
+endfunction
+" }}}
