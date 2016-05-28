@@ -19,6 +19,7 @@ call plug#begin()
   Plug 'airblade/vim-gitgutter'
   Plug 'benekastah/neomake'
   Plug 'christoomey/vim-tmux-navigator'
+  Plug 'ctrlpvim/ctrlp.vim'
   Plug 'cocopon/lightline-hybrid.vim'
   Plug 'ervandew/supertab'
   Plug 'itchyny/lightline.vim'
@@ -299,7 +300,7 @@ cnoreabbrev make Neomake! make
   " Ruby {{{
   augroup ruby_
     autocmd!
-    autocmd BufWritePost *.rb,*.ru,*.erb Neomake
+    autocmd BufWritePost *.rb,*.ru,*.erb,Rakefile,Gemfile Neomake
   augroup END
   " }}}
 
