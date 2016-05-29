@@ -1,5 +1,5 @@
 [core]
-  excludesfile = /Users/Max/.dotfiles/git/ignore
+  excludesfile = ~/.dotfiles/git/ignore
   editor = nvim
 
 [diff]
@@ -9,5 +9,5 @@
   default = simple
 
 [user]
-  email = maxmcc@seas.upenn.edu
+  email = hello@maxmcc.com
   name = Max McCarthy
