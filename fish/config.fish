@@ -20,4 +20,7 @@ set -gx PATH $HOME/.rbenv/shims $PATH
 rbenv rehash > /dev/null ^&1
 set -gx PATH ./bin $PATH
 eval (opam config env)
+
+set -gx MYVIMRC $HOME/.dotfiles/nvim/init.vim
+set -gx FISHCONF $HOME/.dotfiles/fish/config.fish
 # }}}
