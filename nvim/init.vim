@@ -234,7 +234,8 @@ cnoreabbrev make Neomake! make
   augroup END
   " }}}
 
-  " Haskell {{{
+  " HTML {{{
+  inoremap </ </<C-X><C-O>
   " }}}
 
   " LaTeX {{{
@@ -300,6 +301,7 @@ cnoreabbrev make Neomake! make
   " Ruby {{{
   augroup ruby_
     autocmd!
+    let g:neomake_ruby_enabled_makers = ['mri', 'rubocop']
     autocmd BufWritePost *.rb,*.ru,*.erb,Rakefile,Gemfile Neomake
   augroup END
   " }}}
