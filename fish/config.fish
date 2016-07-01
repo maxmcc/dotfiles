@@ -1,5 +1,5 @@
 # Autojump {{{
-test -f /usr/local/share/autojump/autojump.fish;
+[ -f /usr/local/share/autojump/autojump.fish ];
   and . /usr/local/share/autojump/autojump.fish
 # }}}
 
