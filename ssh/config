@@ -8,20 +8,6 @@ Host eniac
     ForwardAgent yes
     Port 22
 
-# Because I'm a bad typist
-Host enaic
-    HostName eniac.seas.upenn.edu
-    User maxmcc
-    IdentityFile ~/.ssh/eniac_rsa
-    ForwardAgent yes
-    Port 22
-
-Host cis120
-    HostName croniac.seas.upenn.edu
-    User cis120
-    IdentityFile ~/.ssh/120_rsa
-    Port 22
-
 Host github.com
     HostName github.com
     IdentityFile ~/.ssh/github_rsa
