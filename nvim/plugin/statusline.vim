@@ -1,11 +1,19 @@
 " Status line configuration
 
+" Vim configuration {{{
+set laststatus=2                         " Last window always has status line
+set noshowmode                           " Don't show '-- INSERT --' etc.
+" }}}
+
+" Lightline configuration {{{
+
 let g:lightline = {}
 let g:lightline.component = {}
 let g:lightline.component_type = {}
 let g:lightline.component_expand = {}
 let g:lightline.component_function = {}
 let g:lightline.component_visible_condition = {}
+" }}}
 
 " Appearance {{{
 let g:lightline.colorscheme = 'hybrid'
