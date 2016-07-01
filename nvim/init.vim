@@ -54,11 +54,6 @@ call plug#begin()
 call plug#end()
 " }}}
 
-" Status line (lightline) {{{
-set laststatus=2                         " Last window always has status line
-set noshowmode                           " Don't show '-- INSERT --' etc.
-" }}}
-
 " Backups {{{
 set nobackup                             " Don't generate backups
 set nowritebackup                        " Don't create backup files
@@ -94,6 +89,12 @@ set incsearch                            " Highlight as-you-type
 set hlsearch                             " Highlight matches
 set ignorecase                           " Ignore case in query, unless...
 set smartcase                            " ...different cases used
+" }}}
+
+" Ctrl-P {{{
+let g:ctrlp_custom_ignore = {
+      \ 'dir': '\v[\/](\.(git|hg|svn|sass-cache)|tmp|node_modules|\.sass-cache|build)$'
+      \ }
 " }}}
 
 " Style issues {{{
@@ -234,6 +235,27 @@ cnoreabbrev make Neomake! make
   augroup END
   " }}}
 
+  " Coq {{{
+  function! CoquilleKeybindings()
+    map <buffer> <silent> <F7> :CoqUndo<CR>
+    map <buffer> <silent> <F8> :CoqNext<CR>
+    map <buffer> <silent> <F9> :CoqToCursor<CR>
+
+    imap <buffer> <silent> <F7> <C-\><C-o>:CoqUndo<CR>
+    imap <buffer> <silent> <F8> <C-\><C-o>:CoqNext<CR>
+    imap <buffer> <silent> <F9> <C-\><C-o>:CoqToCursor<CR>
+  endfunction
+
+  augroup coq
+    autocmd!
+    autocmd BufRead,BufNewFile *.v set filetype=coq
+    let g:coquille_auto_move = 'true'
+    autocmd FileType coq call CoquilleKeybindings()
+    highlight CheckedByCoq ctermbg=17 guibg=LightGreen
+    highlight SentToCoq ctermbg=60 guibg=LimeGreen
+  augroup END
+  " }}}
+
   " HTML {{{
   inoremap </ </<C-X><C-O>
   " }}}
@@ -313,24 +335,10 @@ cnoreabbrev make Neomake! make
   augroup END
   " }}}
 
-  " Coq {{{
-  function! CoquilleKeybindings()
-    map <buffer> <silent> <F7> :CoqUndo<CR>
-    map <buffer> <silent> <F8> :CoqNext<CR>
-    map <buffer> <silent> <F9> :CoqToCursor<CR>
-
-    imap <buffer> <silent> <F7> <C-\><C-o>:CoqUndo<CR>
-    imap <buffer> <silent> <F8> <C-\><C-o>:CoqNext<CR>
-    imap <buffer> <silent> <F9> <C-\><C-o>:CoqToCursor<CR>
-  endfunction
-
-  augroup coq
+  " SCSS {{{
+  augroup scss
     autocmd!
-    autocmd BufRead,BufNewFile *.v set filetype=coq
-    let g:coquille_auto_move = 'true'
-    autocmd FileType coq call CoquilleKeybindings()
-    highlight CheckedByCoq ctermbg=17 guibg=LightGreen
-    highlight SentToCoq ctermbg=60 guibg=LimeGreen
+    autocmd BufWritePost *.scss Neomake
   augroup END
   " }}}
 "}}}
