@@ -37,6 +37,7 @@ call plug#begin()
   "  Language-specific plugins
   Plug 'aliva/vim-fish', { 'for': 'fish' }
   Plug 'bitc/vim-hdevtools', { 'for': 'haskell' }
+  Plug 'elixir-lang/vim-elixir'
   Plug 'cespare/vim-toml', { 'for': 'toml' }
   Plug 'def-lkb/vimbufsync', { 'for': 'coq' }
         \ | Plug 'the-lambda-church/coquille',
@@ -224,16 +225,11 @@ let g:neomake_verbose = 0
 
 cnoreabbrev oldmake make
 cnoreabbrev make Neomake! make
+
+autocmd BufWritePost * Neomake
 " }}}
 
 " Language-specific {{{
-
-  " C {{{
-  augroup c
-    autocmd!
-    autocmd BufWritePost *.c,*.h Neomake
-  augroup END
-  " }}}
 
   " Coq {{{
   function! CoquilleKeybindings()
