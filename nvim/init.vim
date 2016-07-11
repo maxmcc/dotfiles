@@ -16,42 +16,37 @@ let g:python_host_prog = '/usr/local/bin/python'
 
 " Plugins (vim-plug) {{{
 call plug#begin()
-  Plug 'airblade/vim-gitgutter'
-  Plug 'benekastah/neomake'
-  Plug 'christoomey/vim-tmux-navigator'
-  Plug 'ctrlpvim/ctrlp.vim'
-  Plug 'cocopon/lightline-hybrid.vim'
-  Plug 'ervandew/supertab'
-  Plug 'itchyny/lightline.vim'
-  Plug 'konfekt/FastFold' | Plug 'lukaszkorecki/workflowish'
-  Plug 'mhinz/vim-startify'
-  Plug 'scrooloose/nerdtree'
-  Plug 'shougo/deoplete.nvim'
-  Plug 'tpope/vim-fugitive'
-  Plug 'tpope/vim-git'
-  Plug 'tpope/vim-liquid'
-  Plug 'tpope/vim-surround'
-  Plug 'w0ng/vim-hybrid'
-  Plug 'wellle/tmux-complete.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'benekastah/neomake'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'cocopon/lightline-hybrid.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'ervandew/supertab'
+Plug 'itchyny/lightline.vim'
+Plug 'mhinz/vim-startify'
+Plug 'scrooloose/nerdtree'
+Plug 'shougo/deoplete.nvim'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-git'
+Plug 'tpope/vim-surround'
+Plug 'w0ng/vim-hybrid'
+Plug 'wellle/tmux-complete.vim'
 
-  "  Language-specific plugins
-  Plug 'aliva/vim-fish', { 'for': 'fish' }
-  Plug 'bitc/vim-hdevtools', { 'for': 'haskell' }
-  Plug 'elixir-lang/vim-elixir'
-  Plug 'cespare/vim-toml', { 'for': 'toml' }
-  Plug 'def-lkb/vimbufsync', { 'for': 'coq' }
-        \ | Plug 'the-lambda-church/coquille',
-        \ { 'for': 'coq', 'branch': 'pathogen-bundle' }
-  Plug 'lervag/vimtex', { 'for': 'tex' }
-  Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
-  Plug 'othree/html5.vim', { 'for': 'html' }
-  Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-  Plug 'scrooloose/syntastic', { 'for': 'ocaml' }
-  Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+"  Language-specific plugins
+Plug 'aliva/vim-fish', { 'for': 'fish' }
+Plug 'bitc/vim-hdevtools', { 'for': 'haskell' }
+Plug 'cespare/vim-toml', { 'for': 'toml' }
+Plug 'lervag/vimtex', { 'for': 'tex' }
+Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
+Plug 'othree/html5.vim', { 'for': 'html' }
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'scrooloose/syntastic', { 'for': 'ocaml' }
+Plug 'tpope/vim-liquid', { 'for': 'liquid' }
+Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 
-  "  Plugins managed by OPAM
-  Plug '~/.opam/system/share/ocp-indent', { 'rtp': 'vim', 'for': 'ocaml' }
-  Plug '~/.opam/system/share/merlin', { 'rtp': 'vim', 'for': 'ocaml' }
+"  Plugins managed by OPAM
+Plug '~/.opam/system/share/ocp-indent', { 'rtp': 'vim', 'for': 'ocaml' }
+Plug '~/.opam/system/share/merlin', { 'rtp': 'vim', 'for': 'ocaml' }
 call plug#end()
 " }}}
 
@@ -110,12 +105,12 @@ augroup column_limit
 augroup END
 
 "   Trailing whitespace
-fun! <SID>StripTrailingWhitespace()
+function! <SID>StripTrailingWhitespace()
   let l = line(".")
   let c = col(".")
   %s/\s\+$//e
   call cursor(l, c)
-endfun
+endfunction
 
 augroup whitespace
   autocmd!
@@ -131,7 +126,7 @@ set shiftround                           " Indent to nearest multiple of 2
 set autoindent                           " Automatically indent things
 
 "   Highlight tab characters
-" Establishes highlight group for tab characters
+"   Establishes highlight group for tab characters
 execute "set listchars=tab:\u2023\u2023"
 set list                                " Enable highlight list
 " }}}
@@ -141,6 +136,8 @@ set list                                " Enable highlight list
 set background=dark
 let base16colorspace=256
 colorscheme hybrid
+
+"   Nicer vertical boundaries
 set fillchars+=vert:│
 
 "   GUI vim
@@ -157,7 +154,6 @@ endif
 " File navigation {{{
 "   Line numbers
 set number                              " Show line numbers
-" set cursorline                        " Highlight current line
 
 "   Movement by visual lines
 nnoremap j gj
@@ -190,7 +186,7 @@ nnoremap <space> za
 " }}}
 
 " Text manipulation {{{
-fun! TwiddleCase(str)
+function! TwiddleCase(str)
   if a:str ==# toupper(a:str)
     let result = tolower(a:str)
   elseif a:str ==# tolower(a:str)
