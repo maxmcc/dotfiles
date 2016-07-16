@@ -21,4 +21,4 @@ vimlink plugin
 
 ln -s $DOTS/tmux/tmux.conf ~/.tmux.conf
 ln -s $DOTS/git/config ~/.gitconfig
-
+mkdir -p ~/.ssh/config; and ln -s $DOTS/ssh/config ~/.ssh/config
