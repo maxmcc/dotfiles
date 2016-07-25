@@ -36,6 +36,7 @@ Plug 'wellle/tmux-complete.vim'
 Plug 'aliva/vim-fish', { 'for': 'fish' }
 Plug 'bitc/vim-hdevtools', { 'for': 'haskell' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
+Plug 'hail2u/vim-css3-syntax'
 Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'othree/html5.vim', { 'for': 'html' }
@@ -201,7 +202,7 @@ vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 " }}}
 
 " Leader shortcuts {{{
-nnoremap <leader>ev :e $MYVIMRC<CR>
+nnoremap <leader>ev :tabe $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 " }}}
 
