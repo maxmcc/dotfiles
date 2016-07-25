@@ -14,12 +14,11 @@ fundle init
 # }}}
 
 # Exports {{{
-set -gx PATH $HOME/.cabal/bin $PATH
-set -gx PATH $HOME/.multirust/toolchains/stable/cargo/bin $PATH
-set -gx PATH $HOME/.rbenv/shims $PATH
-rbenv rehash > /dev/null ^&1
-set -gx PATH ./bin $PATH
-eval (opam config env)
+# set -gx PATH $HOME/.cabal/bin $PATH
+# set -gx PATH $HOME/.multirust/toolchains/stable/cargo/bin $PATH
+# set -gx PATH ./bin $PATH
+# eval (opam config env)
+status --is-interactive; and . (rbenv init -|psub)
 
 set -gx MYVIMRC $HOME/.dotfiles/nvim/init.vim
 set -gx FISHCONF $HOME/.dotfiles/fish/config.fish
