@@ -39,7 +39,7 @@ Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'hail2u/vim-css3-syntax'
 Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
-Plug 'othree/html5.vim', { 'for': 'html' }
+Plug 'othree/html5.vim'
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'scrooloose/syntastic', { 'for': 'ocaml' }
 Plug 'tpope/vim-liquid', { 'for': 'liquid' }
