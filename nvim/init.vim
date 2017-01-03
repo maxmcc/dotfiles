@@ -4,14 +4,12 @@
 "   Fish breaks some plugins
 set shell=/bin/bash
 
-"   OS X keys are wrong
-nnoremap <BS> <C-W>h
-
 "   Kill ex-mode with fire
 nnoremap Q <nop>
 
 "   Tell it where to find Python
-let g:python_host_prog = '/usr/local/bin/python'
+let g:python_host_prog = '/usr/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
 " }}}
 
 " Plugins (vim-plug) {{{
@@ -32,22 +30,15 @@ Plug 'tpope/vim-surround'
 Plug 'w0ng/vim-hybrid'
 Plug 'wellle/tmux-complete.vim'
 
-"  Language-specific plugins
-Plug 'aliva/vim-fish', { 'for': 'fish' }
-Plug 'bitc/vim-hdevtools', { 'for': 'haskell' }
-Plug 'cespare/vim-toml', { 'for': 'toml' }
+" Language support
+Plug 'aliva/vim-fish'
+Plug 'cespare/vim-toml'
+Plug 'elixir-lang/vim-elixir'
 Plug 'hail2u/vim-css3-syntax'
-Plug 'lervag/vimtex', { 'for': 'tex' }
-Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'othree/html5.vim'
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-Plug 'scrooloose/syntastic', { 'for': 'ocaml' }
-Plug 'tpope/vim-liquid', { 'for': 'liquid' }
-Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+Plug 'tpope/vim-liquid'
+Plug 'vim-ruby/vim-ruby'
 
-"  Plugins managed by OPAM
-Plug '~/.opam/system/share/ocp-indent', { 'rtp': 'vim', 'for': 'ocaml' }
-Plug '~/.opam/system/share/merlin', { 'rtp': 'vim', 'for': 'ocaml' }
 call plug#end()
 " }}}
 
@@ -135,7 +126,7 @@ set list                                " Enable highlight list
 " Appearance {{{
 "   vim-hybrid color scheme
 set background=dark
-let base16colorspace=256
+let g:hybrid_custom_term_colors = 1
 colorscheme hybrid
 
 "   Nicer vertical boundaries
@@ -204,6 +195,7 @@ vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 " Leader shortcuts {{{
 nnoremap <leader>ev :tabe $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
+nnoremap <leader>t :NERDTreeToggle<CR>
 " }}}
 
 " Neomake {{{

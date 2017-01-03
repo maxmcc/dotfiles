@@ -17,7 +17,7 @@ let g:lightline.component_visible_condition = {}
 
 " Appearance {{{
 let g:lightline.colorscheme = 'hybrid'
-let g:lightline.subseparator = { 'left' : '', 'right': '│' }
+let g:lightline.subseparator = { 'left' : '', 'right': '·' }
 " }}}
 
 " Active frame statusline {{{

@@ -1,12 +1,5 @@
 Host *
-    ServerAliveInterval 60
-
-Host eniac
-    HostName eniac.seas.upenn.edu
-    User maxmcc
-    IdentityFile ~/.ssh/eniac_rsa
-    ForwardAgent yes
-    Port 22
+    UseKeychain yes
 
 Host github.com
     HostName github.com
