@@ -75,6 +75,7 @@ set showmatch
 
 " Searching {{{
 set incsearch                            " Highlight as-you-type
+set inccommand=nosplit                   " And preview substitutions
 set hlsearch                             " Highlight matches
 set ignorecase                           " Ignore case in query, unless...
 set smartcase                            " ...different cases used
