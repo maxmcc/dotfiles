@@ -1,2 +1,4 @@
 fish_history
 completions
+nvim/autoload/plug.vim*
+fish/functions/fundle.fish
