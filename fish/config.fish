@@ -13,8 +13,5 @@ fundle init
 # }}}
 
 # Exports {{{
-status --is-interactive; and . (rbenv init -|psub)
-
-set -gx MYVIMRC $HOME/.dotfiles/nvim/init.vim
-set -gx FISHCONF $HOME/.dotfiles/fish/config.fish
+status --is-interactive; and . (rbenv init - | psub)
 # }}}
