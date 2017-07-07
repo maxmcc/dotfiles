@@ -93,11 +93,6 @@ set wrap                                 " Automatically wrap lines
 set linebreak                            " Insert linebreaks for long lines
 set textwidth=80                         " Wrap at 80 characters
 
-augroup column_limit
-  autocmd BufEnter ocaml highlight OverLength ctermbg=darkgrey guibg=#404040
-  autocmd BufEnter ocaml match OverLength '\%>80v.\+'
-augroup END
-
 "   Trailing whitespace
 function! <SID>StripTrailingWhitespace()
   let l = line(".")
