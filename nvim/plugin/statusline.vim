@@ -27,7 +27,7 @@ let g:lightline.active.left =
       \  ['filename', 'modified'],
       \  ['readonly', 'fugitive']]
 let g:lightline.active.right =
-      \ [['syntastic', 'lineinfo'],
+      \ [['lineinfo'],
       \  ['percent'],
       \  ['fileformat', 'fileencoding', 'filetype']]
 " }}}
@@ -67,20 +67,6 @@ function! LightLineReadonly()
   else
     return ""
   endif
-endfunction
-" }}}
-
-" Syntastic {{{
-let g:lightline.component_expand.syntastic = 'SyntasticStatuslineFlag'
-let g:lightline.component_type.syntastic = 'error'
-
-augroup LightlineSyntastic
-  autocmd!
-  autocmd BufWritePost *.ml,*.mli call s:syntastic()
-augroup END
-function! s:syntastic()
-  SyntasticCheck
-  call lightline#update()
 endfunction
 " }}}
 
