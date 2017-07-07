@@ -15,7 +15,6 @@ function vimlink
 end
 
 vimlink init.vim
-vimlink autoload
 vimlink ftplugin
 vimlink plugin
 
