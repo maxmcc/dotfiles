@@ -168,7 +168,6 @@ set splitright                          " Vertical splits go right
 set foldenable                          " Enable folding
 set foldmethod=marker                   " Fold between {{{/}}}
 set foldlevelstart=10                   " Open most folds by default
-set foldnestmax=10                      " Don't nest deeper than 10
 
 "   Keybindings
 nnoremap <space> za
