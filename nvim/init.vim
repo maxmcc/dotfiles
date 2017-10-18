@@ -91,7 +91,7 @@ let g:ctrlp_custom_ignore = {
 "   Text width
 set wrap                                 " Automatically wrap lines
 set linebreak                            " Insert linebreaks for long lines
-set textwidth=80                         " Wrap at 80 characters
+set textwidth=100                        " Wrap at 100 characters
 
 "   Trailing whitespace
 function! <SID>StripTrailingWhitespace()
