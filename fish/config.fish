@@ -19,4 +19,7 @@ fundle init
 
 # Exports {{{
 status --is-interactive; and . (rbenv init - | psub)
+if test -d ~/.cargo
+  set -gx PATH $PATH ~/.cargo/bin
+end
 # }}}
