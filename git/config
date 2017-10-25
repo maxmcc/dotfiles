@@ -11,3 +11,7 @@
 [user]
   email = hello@maxmcc.com
   name = Max McCarthy
+
+[alias]
+  submoudle = submodule
+  submoduel = submodule

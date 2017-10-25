@@ -14,8 +14,8 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 
 " Plugins (vim-plug) {{{
 call plug#begin()
+
 Plug 'airblade/vim-gitgutter'
-Plug 'benekastah/neomake'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'cocopon/lightline-hybrid.vim'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -28,6 +28,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-surround'
 Plug 'w0ng/vim-hybrid'
+Plug 'w0rp/ale'
 Plug 'wellle/tmux-complete.vim'
 
 " Language support
@@ -93,7 +94,7 @@ let g:ctrlp_custom_ignore = {
 "   Text width
 set wrap                                 " Automatically wrap lines
 set linebreak                            " Insert linebreaks for long lines
-set textwidth=80                         " Wrap at 80 characters
+set textwidth=100                        " Wrap at 100 characters
 
 "   Trailing whitespace
 function! <SID>StripTrailingWhitespace()
@@ -170,7 +171,6 @@ set splitright                          " Vertical splits go right
 set foldenable                          " Enable folding
 set foldmethod=marker                   " Fold between {{{/}}}
 set foldlevelstart=10                   " Open most folds by default
-set foldnestmax=10                      " Don't nest deeper than 10
 
 "   Keybindings
 nnoremap <space> za
@@ -197,22 +197,3 @@ nnoremap <leader>sv :source $MYVIMRC<CR>
 nnoremap <leader>t :NERDTreeToggle<CR>
 " }}}
 
-" Neomake {{{
-let g:neomake_warning_sign = {
-      \ 'text': '>>',
-      \ 'texthl': 'Warning',
-      \ }
-
-let g:neomake_error_sign = {
-      \ 'text': '>>',
-      \ 'texthl': 'Error',
-      \ }
-
-let g:neomake_echo_current_error = 1
-let g:neomake_verbose = 0
-
-cnoreabbrev oldmake make
-cnoreabbrev make Neomake! make
-
-autocmd BufWritePost * Neomake
-" }}}

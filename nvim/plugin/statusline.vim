@@ -70,15 +70,6 @@ function! LightLineReadonly()
 endfunction
 " }}}
 
-" Neomake {{{
-let g:lightline.component_function.neomake = 'neomake#statusline#LoclistStatus'
-let g:lightline.component_type.neomake = 'error'
-augroup LightlineNeomake
-  autocmd!
-  autocmd BufWritePost *.rs,*.tex call lightline#update()
-augroup END
-" }}}
-
 " Fugitive {{{
 let g:lightline.component_function.fugitive = 'LightLineFugitive'
 function! LightLineFugitive()
