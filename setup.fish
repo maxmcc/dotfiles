@@ -18,6 +18,8 @@ vimlink init.vim
 vimlink ftplugin
 vimlink plugin
 
+curl -fLo $CONFIG/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 ln -s $DOTS/tmux/tmux.conf ~/.tmux.conf
 ln -s $DOTS/git/config ~/.gitconfig
 mkdir -p ~/.ssh; and ln -s $DOTS/ssh/config ~/.ssh/config
