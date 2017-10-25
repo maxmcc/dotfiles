@@ -14,8 +14,8 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 
 " Plugins (vim-plug) {{{
 call plug#begin()
+
 Plug 'airblade/vim-gitgutter'
-Plug 'benekastah/neomake'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'cocopon/lightline-hybrid.vim'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -28,6 +28,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-surround'
 Plug 'w0ng/vim-hybrid'
+Plug 'w0rp/ale'
 Plug 'wellle/tmux-complete.vim'
 
 " Language support
@@ -194,22 +195,3 @@ nnoremap <leader>sv :source $MYVIMRC<CR>
 nnoremap <leader>t :NERDTreeToggle<CR>
 " }}}
 
-" Neomake {{{
-let g:neomake_warning_sign = {
-      \ 'text': '>>',
-      \ 'texthl': 'Warning',
-      \ }
-
-let g:neomake_error_sign = {
-      \ 'text': '>>',
-      \ 'texthl': 'Error',
-      \ }
-
-let g:neomake_echo_current_error = 1
-let g:neomake_verbose = 0
-
-cnoreabbrev oldmake make
-cnoreabbrev make Neomake! make
-
-autocmd BufWritePost * Neomake
-" }}}
