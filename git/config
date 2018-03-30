@@ -15,3 +15,5 @@
 [alias]
   submoudle = submodule
   submoduel = submodule
+[merge]
+	tool = opendiff
