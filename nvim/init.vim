@@ -21,6 +21,7 @@ Plug 'cocopon/lightline-hybrid.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ervandew/supertab'
 Plug 'itchyny/lightline.vim'
+Plug 'maximbaz/lightline-ale'
 Plug 'mhinz/vim-startify'
 Plug 'scrooloose/nerdtree'
 Plug 'shougo/deoplete.nvim'
@@ -38,10 +39,16 @@ Plug 'elixir-lang/vim-elixir'
 Plug 'elmcast/elm-vim'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'keith/swift.vim'
+Plug 'lervag/vimtex'
 Plug 'othree/html5.vim'
 Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-liquid'
 Plug 'vim-ruby/vim-ruby'
+
+" Managed plugins
+let opam_share = system('opam config var share')[:-2]
+Plug opam_share . '/ocp-indent', { 'rtp': 'vim' }
+Plug opam_share . '/merlin', { 'rtp': 'vim' }
 
 call plug#end()
 " }}}
@@ -195,5 +202,9 @@ vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 nnoremap <leader>ev :tabe $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 nnoremap <leader>t :NERDTreeToggle<CR>
+" }}}
+
+" Errors and warnings {{{
+let g:ale_open_list = 0
 " }}}
 
