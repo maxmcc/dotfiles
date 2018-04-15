@@ -3,3 +3,7 @@ Host github.com
     IdentityFile ~/.ssh/github_rsa
     User git
 
+Host gitlab.com
+    HostName gitlab.com
+    IdentityFile ~/.ssh/gitlab_rsa
+    User git
