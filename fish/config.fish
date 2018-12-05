@@ -25,4 +25,6 @@ end
 if test -d ~/.opam
   source ~/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
 end
+
+set -gx EDITOR nvim
 # }}}
