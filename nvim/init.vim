@@ -127,7 +127,6 @@ set autoindent                           " Automatically indent things
 "   Highlight tab characters
 "   Establishes highlight group for tab characters
 execute "set listchars=tab:\u2023\u2023"
-set list                                " Enable highlight list
 " }}}
 
 " Appearance {{{
