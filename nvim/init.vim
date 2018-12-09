@@ -31,6 +31,7 @@ Plug 'wellle/tmux-complete.vim'
 " Language support
 Plug 'aliva/vim-fish'
 Plug 'cespare/vim-toml'
+Plug 'copy/deoplete-ocaml'
 Plug 'elixir-lang/vim-elixir'
 Plug 'elmcast/elm-vim'
 Plug 'hail2u/vim-css3-syntax'
