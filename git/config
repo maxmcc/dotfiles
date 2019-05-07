@@ -9,8 +9,8 @@
   default = simple
 
 [user]
-  email = max_mccarthy@apple.com
   name = Max McCarthy
+  email = max_mccarthy@apple.com
 
 [alias]
   submoudle = submodule
@@ -18,3 +18,12 @@
 
 [merge]
   tool = opendiff
+
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+
+[pull]
+  rebase = true
