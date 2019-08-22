@@ -1,6 +1,7 @@
 # Autojump {{{
-[ -f /usr/local/share/autojump/autojump.fish ];
-  and . /usr/local/share/autojump/autojump.fish
+if test -f /usr/local/share/autojump/autojump.fish
+  source /usr/local/share/autojump/autojump.fish
+end
 # }}}
 
 # Fish plugins {{{
@@ -18,10 +19,14 @@ fundle init
 # }}}
 
 # Exports {{{
-status --is-interactive; and . (rbenv init - | psub)
+if test -d ~/.rbenv
+  source (rbenv init - | psub)
+end
+
 if test -d ~/.cargo
   set -gx PATH $PATH ~/.cargo/bin
 end
+
 if test -d ~/.opam
   source ~/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
 end
