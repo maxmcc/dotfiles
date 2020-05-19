@@ -1,6 +1,6 @@
 # Autojump {{{
-if test -f /usr/local/share/autojump/autojump.fish
-  source /usr/local/share/autojump/autojump.fish
+if test -f (brew --prefix)/share/autojump/autojump.fish
+  source (brew --prefix)/share/autojump/autojump.fish
 end
 # }}}
 
