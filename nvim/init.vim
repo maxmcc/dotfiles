@@ -15,9 +15,9 @@ Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'cocopon/lightline-hybrid.vim'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'dense-analysis/ale'
 Plug 'ervandew/supertab'
 Plug 'itchyny/lightline.vim'
-Plug 'maximbaz/lightline-ale'
 Plug 'mhinz/vim-startify'
 Plug 'scrooloose/nerdtree'
 Plug 'shougo/deoplete.nvim'
@@ -25,7 +25,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'tpope/vim-surround'
 Plug 'w0ng/vim-hybrid'
-Plug 'w0rp/ale'
 Plug 'wellle/tmux-complete.vim'
 
 " Language support
@@ -57,13 +56,45 @@ set noswapfile                           " Prevent swap files
 " }}}
 
 " Tab completion {{{
+set completeopt-=preview
+
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
+call deoplete#custom#option({
+      \ 'smart_case': v:true,
+      \ 'sources': {'rust': ['ale', 'racer']}
+      \ })
+
+:inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 "   Don't be stupid about directions
 let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:SuperTabContextDefaultCompletionType = "<c-n>"
 " }}}
+
+" Errors and warnings {{{
+set hidden
+nnoremap K :ALEHover<CR>
+
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '--'
+
+let g:ale_fixers = {
+      \ 'rust': ['rustfmt'],
+      \ }
+
+let g:ale_linters = {
+      \ 'rust': ['rls'],
+      \ }
+
+let g:ale_fix_on_save = 1
+
+let g:ale_lint_on_text_changed = 0
+let g:ale_lint_on_insert_leave = 0
+let g:ale_lint_on_enter = 1
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_filetype_changed = 1
+" }}}
+
 
 " Ergonomics {{{
 "   No noises
@@ -198,9 +229,5 @@ vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 nnoremap <leader>ev :tabe $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 nnoremap <leader>t :NERDTreeToggle<CR>
-" }}}
-
-" Errors and warnings {{{
-let g:ale_open_list = 0
 " }}}
 
