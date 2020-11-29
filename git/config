@@ -1,29 +1,32 @@
 [core]
-  excludesfile = ~/.dotfiles/git/ignore
-  editor = nvim
+excludesfile = ~/.dotfiles/git/ignore
+editor = nvim
 
 [diff]
-  algorithm = patience
+algorithm = patience
 
 [push]
-  default = simple
+default = simple
 
 [user]
-  name = Max McCarthy
-  email = max_mccarthy@apple.com
+name = Max McCarthy
+email = hello@maxmcc.com
+
+[includeIf "gitdir:~/Library/Mobile Documents/com~apple~icloud~applecorporate/"]
+path = ~/.dotfiles/git/config.work
 
 [alias]
-  submoudle = submodule
-  submoduel = submodule
+submoudle = submodule
+submoduel = submodule
 
 [merge]
-  tool = opendiff
+tool = opendiff
 
 [filter "lfs"]
-  clean = git-lfs clean -- %f
-  smudge = git-lfs smudge -- %f
-  process = git-lfs filter-process
-  required = true
+clean = git-lfs clean -- %f
+smudge = git-lfs smudge -- %f
+process = git-lfs filter-process
+required = true
 
 [pull]
-  rebase = true
+rebase = true
