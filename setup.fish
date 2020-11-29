@@ -16,16 +16,12 @@ end
 vimlink init.vim
 vimlink ftplugin
 vimlink plugin
+vimlink coc-settings.json
 curl -fLo $CONFIG/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 ln -Fs $DOTS/tmux/tmux.conf ~/.tmux.conf
 
 ln -Fs $DOTS/git/config ~/.gitconfig
 
-mkdir -p ~/.ssh
-function sshlink
-  ln -Fs $DOTS/ssh/$argv ~/.ssh/$argv
-end
-sshlink config
-sshlink configs
+ln -Fs $DOTS/ssh/config ~/.ssh/config
 
