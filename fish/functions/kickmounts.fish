@@ -1,4 +1,3 @@
-# Defined in /var/folders/pm/bwknx3zx5mvf_nvjz1lhl9lc0000gn/T//fish.nTFhrA/kickmounts.fish @ line 1
 function kickmounts
   appleconnect signOut
   appleconnect authenticate -a max_mccarthy --show-signIn-dialog
