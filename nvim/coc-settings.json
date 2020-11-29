@@ -1,0 +1,5 @@
+{
+    "diagnostic.messageDelay": 500,
+    "diagnostic.errorSign": ">>",
+    "diagnostic.warningSign": ">>"
+}
