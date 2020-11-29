@@ -18,18 +18,3 @@ fundle plugin 'tuvistavie/fish-fastdir'
 fundle init
 # }}}
 
-# Exports {{{
-if test -d ~/.rbenv
-  source (rbenv init - | psub)
-end
-
-if test -d ~/.cargo
-  set -gx PATH $PATH ~/.cargo/bin
-end
-
-if test -d ~/.opam
-  source ~/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
-end
-
-set -gx EDITOR nvim
-# }}}
