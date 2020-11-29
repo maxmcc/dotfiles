@@ -9,6 +9,7 @@ fishlink config.fish
 fishlink functions
 fishlink completions
 
+set -U EDITOR nvim
 set -U fish_user_paths (brew --prefix)/bin (brew --prefix)/opt/ruby/bin ~/.cargo/bin
 
 mkdir -p $CONFIG/nvim
