@@ -14,37 +14,20 @@ call plug#begin()
 Plug 'airblade/vim-gitgutter'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'cocopon/lightline-hybrid.vim'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'dense-analysis/ale'
 Plug 'ervandew/supertab'
 Plug 'itchyny/lightline.vim'
 Plug 'mhinz/vim-startify'
+Plug 'neoclide/coc.nvim'
 Plug 'scrooloose/nerdtree'
-Plug 'shougo/deoplete.nvim'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
-Plug 'tpope/vim-surround'
 Plug 'w0ng/vim-hybrid'
-Plug 'wellle/tmux-complete.vim'
 
 " Language support
-Plug 'aliva/vim-fish'
-Plug 'cespare/vim-toml'
-Plug 'copy/deoplete-ocaml'
-Plug 'elixir-lang/vim-elixir'
-Plug 'elmcast/elm-vim'
-Plug 'hail2u/vim-css3-syntax'
-Plug 'keith/swift.vim'
-Plug 'lervag/vimtex'
-Plug 'othree/html5.vim'
-Plug 'rust-lang/rust.vim'
-Plug 'tpope/vim-liquid'
-Plug 'vim-ruby/vim-ruby'
-
-" Managed plugins
-let opam_share = system('opam config var share')[:-2]
-Plug opam_share . '/ocp-indent', { 'rtp': 'vim' }
-Plug opam_share . '/merlin', { 'rtp': 'vim' }
+Plug 'aliva/vim-fish', { 'for': 'fish' }
+Plug 'cespare/vim-toml', { 'for': 'toml' }
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'apple/swift', { 'rtp': 'utils/vim' }
 
 call plug#end()
 " }}}
@@ -58,12 +41,6 @@ set noswapfile                           " Prevent swap files
 " Tab completion {{{
 set completeopt-=preview
 
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#option({
-      \ 'smart_case': v:true,
-      \ 'sources': {'rust': ['ale', 'racer']}
-      \ })
-
 :inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 "   Don't be stupid about directions
@@ -73,28 +50,34 @@ let g:SuperTabContextDefaultCompletionType = "<c-n>"
 
 " Errors and warnings {{{
 set hidden
-nnoremap K :ALEHover<CR>
 
-let g:ale_sign_error = '>>'
-let g:ale_sign_warning = '--'
+let g:coc_status_error_sign = 'errors: '
+let g:coc_status_warning_sign = 'warnings: '
 
-let g:ale_fixers = {
-      \ 'rust': ['rustfmt'],
-      \ }
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
-let g:ale_linters = {
-      \ 'rust': ['rls'],
-      \ }
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-rename)
+nmap <silent> gR <Plug>(coc-references)
 
-let g:ale_fix_on_save = 1
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-let g:ale_lint_on_text_changed = 0
-let g:ale_lint_on_insert_leave = 0
-let g:ale_lint_on_enter = 1
-let g:ale_lint_on_save = 1
-let g:ale_lint_on_filetype_changed = 1
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
 " }}}
-
 
 " Ergonomics {{{
 "   No noises
@@ -119,11 +102,6 @@ set ignorecase                           " Ignore case in query, unless...
 set smartcase                            " ...different cases used
 " }}}
 
-" Ctrl-P {{{
-let g:ctrlp_custom_ignore = {
-      \ 'dir': '\v[\/](\.(git|hg|svn|sass-cache)|tmp|node_modules|\.sass-cache|build)$'
-      \ }
-" }}}
 
 " Style issues {{{
 "   Text width
@@ -145,11 +123,11 @@ augroup whitespace
 augroup END
 
 "   Tab characters
-set tabstop=2                            " Visual spaces per tab char
-set softtabstop=2                        " Insert 2 spaces on <TAB>
+set tabstop=4                            " Visual spaces per tab char
+set softtabstop=4                        " Insert 4 spaces on <TAB>
 set expandtab                            " Use spaces, not tabs
-set shiftwidth=2                         " Indent 2 spaces
-set shiftround                           " Indent to nearest multiple of 2
+set shiftwidth=4                         " Indent 4 spaces
+set shiftround                           " Indent to nearest multiple of 4
 set autoindent                           " Automatically indent things
 
 "   Highlight tab characters
@@ -165,16 +143,6 @@ colorscheme hybrid
 
 "   Nicer vertical boundaries
 set fillchars+=vert:│
-
-"   GUI vim
-if has('gui_running')
-  set guioptions-=T                     " Remove toolbar
-  set guioptions-=e                     " Remove GUI tabs
-  set guioptions-=r                     " Remove right scroll bar
-  set guioptions-=L                     " Remove left scroll bra
-  set guifont=FiraMono-Regular:h14      " Set nice font
-  set linespace=2                       " Increase line spacing slightly
-endif
 " }}}
 
 " File navigation {{{
@@ -208,21 +176,6 @@ set foldlevelstart=10                   " Open most folds by default
 
 "   Keybindings
 nnoremap <space> za
-" }}}
-
-" Text manipulation {{{
-function! TwiddleCase(str)
-  if a:str ==# toupper(a:str)
-    let result = tolower(a:str)
-  elseif a:str ==# tolower(a:str)
-    let result = substitute(a:str,'\(\<\w\+\>\)', '\u\1', 'g')
-  else
-    let result = toupper(a:str)
-  endif
-  return result
-endfunction
-
-vnoremap ~ y:call setreg('', TwiddleCase(@"), getregtype(''))<CR>gv""Pgv
 " }}}
 
 " Leader shortcuts {{{

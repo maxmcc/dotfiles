@@ -29,7 +29,8 @@ let g:lightline.active.left =
 let g:lightline.active.right =
       \ [['lineinfo'],
       \  ['percent'],
-      \  ['fileformat', 'fileencoding', 'filetype']]
+      \  ['filetype', 'fileencoding'],
+      \  ['cocinfo', 'cocerrors', 'cocwarnings']]
 " }}}
 
 " Inactive frame statusline {{{
@@ -81,16 +82,40 @@ function! LightLineFugitive()
 endfunction
 " }}}
 
-" CtrlP {{{
-let g:ctrlp_status_func = {}
-let g:ctrlp_status_func.main = 'CtrlPStatusFunc_1'
-let g:ctrlp_status_func.prog = 'CtrlPStatusFunc_2'
-
-function! CtrlPStatusFunc_1(focus, byfname, regex, prev, item, next, marked)
-  return lightline#statusline(0)
+" CoC {{{
+function! LightLineCoCWarnings() abort
+    let info = get(b:, 'coc_diagnostic_info', {})
+    if empty(info) | return '' | endif
+    if get(info, 'warning', 0)
+        return info['warning'] . ' warn'
+    else
+        return ''
+    endif
 endfunction
 
-function! CtrlPStatusFunc_2(str)
-  return lightline#statusline(0)
+function! LightLineCoCErrors() abort
+    let info = get(b:, 'coc_diagnostic_info', {})
+    if empty(info) | return '' | endif
+    if get(info, 'error', 0)
+        return info['error'] . ' err'
+    else
+        return ''
+    endif
 endfunction
+
+function! LightLineCoCInfo() abort
+    let info = get(b:, 'coc_diagnostic_info', {})
+    if empty(info) | return '' | endif
+    return get(g:, 'coc_status', '')
+endfunction
+
+let g:lightline.component_expand.cocwarnings = 'LightLineCoCWarnings'
+let g:lightline.component_type.cocwarnings = 'warning'
+
+let g:lightline.component_expand.cocerrors = 'LightLineCoCErrors'
+let g:lightline.component_type.cocerrors = 'error'
+
+let g:lightline.component_expand.cocinfo = 'LightLineCoCInfo'
+
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 " }}}
