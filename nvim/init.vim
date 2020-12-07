@@ -141,8 +141,6 @@ set background=dark
 let g:hybrid_custom_term_colors = 1
 colorscheme hybrid
 
-highlight CocHintSign ctermfg=8 guifg=#2b2b2b
-
 "   Nicer vertical boundaries
 set fillchars+=vert:│
 " }}}
