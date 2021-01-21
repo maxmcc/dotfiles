@@ -26,8 +26,8 @@ Plug 'w0ng/vim-hybrid'
 " Language support
 Plug 'aliva/vim-fish', { 'for': 'fish' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
+Plug 'keith/swift.vim', { 'for': 'swift' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-Plug 'apple/swift', { 'rtp': 'utils/vim' }
 
 call plug#end()
 " }}}
