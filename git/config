@@ -10,7 +10,7 @@ default = simple
 
 [user]
 name = Max McCarthy
-email = max_mccarthy@apple.com
+email = hello@maxmcc.com
 
 [includeIf "gitdir:~/Library/Mobile Documents/com~apple~icloud~applecorporate/"]
 path = ~/.dotfiles/git/config.work
