@@ -17,7 +17,7 @@ Plug 'cocopon/lightline-hybrid.vim'
 Plug 'ervandew/supertab'
 Plug 'itchyny/lightline.vim'
 Plug 'mhinz/vim-startify'
-Plug 'neoclide/coc.nvim'
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
@@ -26,7 +26,8 @@ Plug 'w0ng/vim-hybrid'
 " Language support
 Plug 'aliva/vim-fish', { 'for': 'fish' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
-Plug 'apple/swift', { 'for': 'swift', 'rtp': 'utils/vim/','name': 'swift' }
+Plug 'keith/swift.vim', { 'for': 'swift' }
+Plug 'othree/html5.vim', { 'for': 'html' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
 call plug#end()
