@@ -1,3 +1,3 @@
-function gd
+function gd --wraps='git diff'
     command git diff $argv
 end
